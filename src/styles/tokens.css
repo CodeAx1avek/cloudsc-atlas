@@ -1,0 +1,361 @@
+/* ==========================================================================
+   CloudSec Atlas — design tokens
+   --------------------------------------------------------------------------
+   The visual idea: a technical drawing of an attack surface. Cool paper,
+   hairline rules, dense typographic hierarchy. Colour is never decoration
+   here — every hue carries meaning:
+
+     azure-ish blue   = concept / structural
+     crimson          = attack
+     indigo           = detect
+     green            = fix
+     provider hue     = which cloud a thing belongs to
+   ========================================================================== */
+
+:root {
+  /* ---- surface -------------------------------------------------------- */
+  --paper: #eceef1;
+  --paper-raised: #f6f7f9;
+  --paper-sunken: #e2e5ea;
+  --ink: #12161c;
+  --ink-soft: #454e5c;
+  --ink-faint: #737d8c;
+  --rule: #d2d7de;
+  --rule-strong: #b4bcc7;
+
+  /* ---- the four beats ------------------------------------------------- */
+  --concept: #2f5fd0;
+  --concept-wash: #e6ecfa;
+  --attack: #c72f2f;
+  --attack-wash: #fae9e9;
+  --detect: #5b45c8;
+  --detect-wash: #ece8fb;
+  --fix: #1f7a4d;
+  --fix-wash: #e3f2e9;
+
+  /* ---- providers ------------------------------------------------------ */
+  --aws: #d9700f;
+  --aws-wash: #faeddf;
+  --azure: #1f6feb;
+  --azure-wash: #e6effc;
+  --gcp: #0f9d70;
+  --gcp-wash: #e0f2eb;
+
+  /* ---- severity ------------------------------------------------------- */
+  --sev-critical: #a81f1f;
+  --sev-high: #c2551b;
+  --sev-medium: #8a6d0f;
+  --sev-low: #4a5563;
+
+  /* ---- type ----------------------------------------------------------- */
+  --font-display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Cascadia Code', Consolas, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 0.9375rem;
+  --step-1: 1.0625rem;
+  --step-2: 1.375rem;
+  --step-3: 1.875rem;
+  --step-4: 2.5rem;
+  --step-5: 3.5rem;
+  --step-6: 4.75rem;
+
+  /* ---- space ---------------------------------------------------------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+
+  --measure: 68ch;
+
+  /* ---- structure ------------------------------------------------------ */
+  --radius: 3px;
+  --radius-lg: 5px;
+  --shadow-sheet: 0 1px 0 var(--rule), 0 8px 24px -18px rgba(18, 22, 28, 0.45);
+
+  --nav-h: 60px;
+  --sidebar-w: 268px;
+}
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.018em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0 0 var(--sp-4);
+  max-width: var(--measure);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+ul,
+ol {
+  margin: 0 0 var(--sp-4);
+  padding-left: 1.25rem;
+  max-width: var(--measure);
+}
+
+li {
+  margin-bottom: var(--sp-2);
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--concept);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: #ffd9a8;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Shared primitives
+   ========================================================================== */
+
+.shell {
+  width: min(1280px, 100% - 3rem);
+  margin-inline: auto;
+}
+
+.shell--narrow {
+  width: min(860px, 100% - 3rem);
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  text-transform: none;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.15em 0.5em;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  background: var(--paper-raised);
+  white-space: nowrap;
+}
+
+.tag--aws {
+  border-color: color-mix(in srgb, var(--aws) 45%, transparent);
+  color: var(--aws);
+  background: var(--aws-wash);
+}
+.tag--azure {
+  border-color: color-mix(in srgb, var(--azure) 45%, transparent);
+  color: var(--azure);
+  background: var(--azure-wash);
+}
+.tag--gcp {
+  border-color: color-mix(in srgb, var(--gcp) 45%, transparent);
+  color: var(--gcp);
+  background: var(--gcp-wash);
+}
+.tag--solid {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper-raised);
+}
+
+.tag--sev-critical {
+  border-color: color-mix(in srgb, var(--sev-critical) 50%, transparent);
+  color: var(--sev-critical);
+  background: #fbe9e9;
+}
+.tag--sev-high {
+  border-color: color-mix(in srgb, var(--sev-high) 50%, transparent);
+  color: var(--sev-high);
+  background: #fdeee2;
+}
+.tag--sev-medium {
+  border-color: color-mix(in srgb, var(--sev-medium) 50%, transparent);
+  color: var(--sev-medium);
+  background: #f8f1d9;
+}
+.tag--sev-low {
+  color: var(--sev-low);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex: none;
+}
+
+.dot--aws {
+  background: var(--aws);
+}
+.dot--azure {
+  background: var(--azure);
+}
+.dot--gcp {
+  background: var(--gcp);
+}
+.dot--exploited {
+  background: var(--attack);
+  box-shadow: 0 0 0 3px var(--attack-wash);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.55em 1em;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--paper-raised);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    border-color 140ms ease;
+}
+
+.btn:hover {
+  background: #262c36;
+  border-color: #262c36;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule-strong);
+}
+
+.btn--ghost:hover {
+  background: var(--paper-raised);
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.btn--sm {
+  padding: 0.35em 0.7em;
+  font-size: var(--step--1);
+}
+
+/* ==========================================================================
+   Animation — one orchestrated load, nothing decorative
+   ========================================================================== */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: var(--dash);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

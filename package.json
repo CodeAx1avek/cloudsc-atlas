@@ -1,0 +1,28 @@
+{
+  "name": "cloudsc-atlas",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CloudSec Atlas — learn cloud security from fundamentals to red team across AWS, Azure and GCP.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc -b --noEmit false --emitDeclarationOnly false",
+    "ingest": "node scripts/ingest-advisories.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.469.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.68.8",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}
